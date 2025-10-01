@@ -5,7 +5,6 @@ import ChainedBackend from 'i18next-chained-backend'
 import HttpBackend from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
 import { LocalResourcesBackend } from './locales'
-import AsyncStorageBackend from './locales/Customi18nAsyncStorage'
 
 // Get device locale (e.g., 'en-US' → 'en')
 const deviceLocale = Localization.getLocales()[0]?.languageCode || 'pt'
@@ -25,7 +24,7 @@ i18n
     },
     backend: {
       backends: [
-        AsyncStorageBackend, // Primary: Load from cache
+        // AsyncStorageBackend, // Primary: Load from cache
         HttpBackend, // Fallback: Fetch from S3
         LocalResourcesBackend, // Last fallback: Load from local files
       ],

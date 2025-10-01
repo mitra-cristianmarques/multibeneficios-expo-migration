@@ -13,7 +13,9 @@ function getTenantFileUrls(profile, apiBaseUrl, tenant) {
 
   if (profile === 'development' || profile === 'staging') {
     return {
-      appLogoPath: path.resolve(path.join(__dirname, '../assets/images/icon.png')),
+      appLogoPath: path.resolve(
+        path.join(__dirname, '../assets/images/icon.png'),
+      ),
       splashScreenPath: path.resolve(
         path.join(__dirname, '../assets/images/splash-icon.png'),
       ),
@@ -54,4 +56,18 @@ function getAppDetails(profile) {
   }
 }
 
-module.exports = { getTenantFileUrls, getAppDetails }
+/**
+ * @description Filter App variables from the system-level variables to add on Expo Extras
+ * @returns {Object} all environment variables starting with APP_
+ */
+function getAppEnvironmentVariables() {
+  const extra = Object.keys(process.env)
+    .filter((key) => key.startsWith('APP_'))
+    .reduce((acc, key) => {
+      acc[key] = process.env[key]
+      return acc
+    }, {})
+  return extra
+}
+
+module.exports = { getTenantFileUrls, getAppDetails, getAppEnvironmentVariables }

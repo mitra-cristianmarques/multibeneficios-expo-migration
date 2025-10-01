@@ -1,5 +1,5 @@
 import { ConfigContext, ExpoConfig } from 'expo/config'
-import { getAppDetails, getTenantFileUrls } from './scripts/getTenantFileUrls'
+import { getAppDetails, getAppEnvironmentVariables, getTenantFileUrls } from './scripts/getTenantFileUrls'
 
 const assets = getTenantFileUrls(
   process.env.EAS_BUILD_PROFILE as string,
@@ -8,8 +8,13 @@ const assets = getTenantFileUrls(
 )
 const appDetails = getAppDetails(process.env.EAS_BUILD_PROFILE as string)
 
+const appEnv = getAppEnvironmentVariables()
+
 export default ({ config }: ConfigContext): ExpoConfig => ({
-  ...config,
+    ...config,
+  extra: {
+    ...appEnv,
+  },
   name: appDetails.name,
   slug: appDetails.name.replace('+', ''),
   version: appDetails.version,
@@ -22,6 +27,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     supportsTablet: true,
     buildNumber: `${appDetails.buildNumber}`,
     bundleIdentifier: appDetails.package,
+    appStoreUrl: `https://apps.apple.com/app/id${process.env.APP_APPLE_APP_STORE_ID}`,
     config: {
       googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
     },

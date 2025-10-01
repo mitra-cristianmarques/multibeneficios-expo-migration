@@ -1,5 +1,16 @@
 {
   "Common": {
     "test": "Teste"
+  },
+  "Navigation": {
+    "Titles": {
+      "login": "Login"
+    },
+    "Tabs": {
+      "home": "Início",
+      "benefits": "Benefícios",
+      "cards": "Cartões",
+      "options": "Opções"
+    }
   }
 }

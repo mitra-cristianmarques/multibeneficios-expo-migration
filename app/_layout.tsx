@@ -3,12 +3,40 @@ import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { Suspense, useEffect } from 'react'
-import { I18nextProvider } from 'react-i18next'
+import { I18nextProvider, useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 import '../i18n'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
+
+function MainStack() {
+  const { t } = useTranslation(['labels'])
+
+  return (
+    <Stack>
+      <Stack.Screen
+        name="index"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="login"
+        options={{
+          headerShown: true,
+          title: t('Navigation.Titles.login'),
+        }}
+      />
+      <Stack.Screen
+        name="home"
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack>
+  )
+}
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -37,7 +65,7 @@ export default function RootLayout() {
           </View>
         }
       >
-        <Stack />
+        <MainStack />
       </Suspense>
     </I18nextProvider>
   )

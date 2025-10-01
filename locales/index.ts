@@ -1,10 +1,13 @@
 import ptLabels from './pt/labels.json'
+import ptMessages from './pt/messages.json'
 
 export const localesResources: any = {
   pt: {
     labels: ptLabels,
-    // You can import and add other namespaces here as you create them
-    // e.g., buttons: ptButtons
+    messages: ptMessages,
+    buttons: {},
+    common: {},
+    errors: {},
   },
 }
 

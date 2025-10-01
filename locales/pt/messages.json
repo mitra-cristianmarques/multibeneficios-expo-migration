@@ -1,0 +1,10 @@
+{
+  "Errors": {
+    "Api": {
+      "Anauthorized": {
+        "title": "",
+        "message": "Ocorreu um erro com a sua solicitação, por favor faça logout e logue novamente!"
+      } 
+    }
+  }
+}
